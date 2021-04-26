@@ -3,6 +3,7 @@ package Homework1;
 
 public class Main {
     public static void main(String[] args) {
+
         Members[] members = {
                 new Cat("Барсик"),
                 new Human("Володя"),
@@ -23,11 +24,11 @@ public class Main {
 
         for (Members r : members) {
             for (Barier o : bariers) {
-                if (o instanceof Runningtrack) {
-                    r.run(o.getLength());
-                } else {
-                    r.jump(o.getHeight());
-                }
+//                if (o instanceof Runningtrack) {
+//                    r.run(o.getLength());
+//                } else {
+//                    r.jump(o.getHeight());
+//                }
                 if (!r.overcome(o)) break;
             }
         }

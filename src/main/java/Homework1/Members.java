@@ -28,6 +28,7 @@ public interface Members {
     default boolean overcome(Barier o) {
         if (o.getLength() > 0) return run(o.getLength());
         else return jump(o.getHeight());
+
     }
 
 
