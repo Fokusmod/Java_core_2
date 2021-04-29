@@ -4,18 +4,18 @@ import java.util.Arrays;
 import java.util.SortedMap;
 
 public class ExceptionMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyArraySizeException {
 
         String[][] strings1 = {{"89", "1", "4", "7"}, {"89", "1", "4", "7"}, {"89", "1", "4", "7"}};
         int[][] ints1 = new int[4][4];
         System.out.println("Пример 1:");
 
         try {
-            TryException(strings1, ints1);
+            TryException(strings1,ints1);
         } catch (MyArraySizeException e) {
-            e.printStackTrace();
-        } catch (MyArrayDataException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка. Неправильный размер массива");
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка метода. Массив содержит строку");
         }
 
 
@@ -24,11 +24,11 @@ public class ExceptionMain {
         System.out.println("Пример 2:");
 
         try {
-            TryException(strings2, ints2);
+            TryException(strings2,ints2);
         } catch (MyArraySizeException e) {
-            e.printStackTrace();
-        } catch (MyArrayDataException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка. Неправильный размер массива");
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка метода. Массив содержит строку");
         }
 
 
@@ -37,33 +37,26 @@ public class ExceptionMain {
         System.out.println("Пример 3");
 
         try {
-            TryException(strings3, ints3);
+            TryException(strings3,ints3);
         } catch (MyArraySizeException e) {
-            e.printStackTrace();
-        } catch (MyArrayDataException e) {
-            e.printStackTrace();
+            System.out.println("Ошибка. Неправильный размер массива");
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка метода. Массив содержит строку");
         }
 
 
     }
 
 
-    private static void TryException(String[][] a, int[][] b) throws MyArraySizeException {
+    private static void TryException(String[][] a, int [][] b) throws MyArraySizeException {
         if (a.length != 4) {
-            throw new MyArraySizeException("Размер массива должен быть 4х4");
+            throw new MyArraySizeException();
         }
         int sum = 0;
         for (int i = 0; i < a.length; i++) {
-            if (a[i].length != 4) {
-                throw new MyArrayDataException("Размер массива должен быть 4х4");
-            }
             for (int j = 0; j < a.length; j++) {
-                try {
-                    b[i][j] = Integer.parseInt(a[i][j]);
-                    sum = b[i][j] + sum;
-                } catch (NumberFormatException e) {
-                    throw new MyArrayDataException("Не удалось преобразовать ячейку " + i + " " + j );
-                }
+                b[i][j] = Integer.parseInt(a[i][j]);
+                sum = b[i][j] + sum;
 
             }
         }
@@ -71,15 +64,7 @@ public class ExceptionMain {
     }
 
     private static class MyArraySizeException extends Throwable {
-        public MyArraySizeException(String massage) {
-            super(massage);
-        }
-    }
 
-    private static class MyArrayDataException extends RuntimeException {
-        public MyArrayDataException(String message) {
-            super(message);
-        }
     }
 
 }
